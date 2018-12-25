@@ -4,19 +4,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const APP_PORT = process.env.PORT || 3500;
-const workspaces = require('./workspace');
+const workspaceRoute = require('./workspace');
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
 setAppUseConfigs();
-app.use('/workspaces', workspaces);
+app.use('/workspace', workspaceRoute);
 app.listen(APP_PORT);
 
 function setAppUseConfigs() {
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.use(bodyParser.json());
-	app.use(function (req, res, next) {
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+  app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -32,5 +32,5 @@ function setAppUseConfigs() {
 
     // Pass to next layer of middleware
     next();
-	});
+  });
 }

@@ -6,7 +6,7 @@ import logo from './assets/logo.svg';
 class App extends React.Component {
   public render() {
     // TODO remove it 
-    fetch('http://localhost:3500/workspaces')
+    fetch('http://localhost:3500/workspace')
       .then(result => result.json())
       .then(body => console.log(body));
 
