@@ -1,20 +1,30 @@
 import * as React from 'react';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
 
-import logo from './assets/logo.svg';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+import { Dashboard } from './components/dashboard';
+
+import './App.css';
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="app">
-        <header className="app-header">
-          <img src={logo} className="app-logo" alt="logo" />
-          <h1 className="app-title">Welcome to React</h1>
-        </header>
-        <p className="app-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <React.Fragment>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="h6" color="inherit">
+              SplitMoney
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+        </Switch>
+      </React.Fragment>
     );
   }
 }
