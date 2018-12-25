@@ -13,6 +13,7 @@
     "semicolon": [true, "always", "ignore-bound-class-methods"],
     "max-file-line-count": [true, 1000],
     "no-console": false,
+    "ordered-imports": false,
     "variable-name": [
       true,
       "ban-keywords",
