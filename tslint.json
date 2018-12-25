@@ -11,12 +11,13 @@
     "max-line-length": [true, 140],
     "semicolon": [true, "always", "ignore-bound-class-methods"],
     "max-file-line-count": [true, 1000],
+    "ordered-imports": false,
     "variable-name": [
       true,
       "ban-keywords",
       "check-format",
       "allow-pascal-case",
       "allow-leading-underscore"
-    ],
+    ]
   }
 }
