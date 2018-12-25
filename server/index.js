@@ -1,36 +1,36 @@
-//TODO: use separate modules and require them in this file
-const mongoose = require('mongoose');
 const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const APP_PORT = process.env.PORT || 3500;
-const workspaceRoute = require('./workspace');
+const middlewares = require('./middlewares');
 
+// Mongo db imports/configs
+const dbConfig = require('./db.config');
+const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
+const MONGO_LAB_DB_URL = dbConfig.config.mongo_uri;
 
-setAppUseConfigs();
-app.use('/workspace', workspaceRoute);
-app.listen(APP_PORT);
 
-function setAppUseConfigs() {
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-  app.use(function (req, res, next) {
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
+const APP_PORT = process.env.PORT || 3500;
+const app = express();
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+MongoClient.connect(MONGO_LAB_DB_URL, (dbError, database) => {
+  if (dbError) {
+    console.log(dbError);
+    return;
+  }
+  console.log('connected to db ' + MONGO_LAB_DB_URL);
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
+  middlewares.setAppUseConfigs(app);
+  app.get('/workspaces', (req, res) => {
+		database.collection('workspaces').find({}).toArray((err, data) => {
+			if (err) {
+        // TODO handle error case and send response
+        console.log(err);
+      } else {
+        res.json(data);
+      }
+		});
   });
-}
+
+  app.listen(APP_PORT);
+});
+

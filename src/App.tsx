@@ -12,7 +12,7 @@ import './App.css';
 class App extends React.Component {
   public render() {
     // TODO remove it 
-    fetch('http://localhost:3500/workspace')
+    fetch('http://localhost:3500/workspaces')
       .then(result => result.json())
       .then(body => console.log(body));
 
