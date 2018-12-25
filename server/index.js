@@ -21,14 +21,14 @@ MongoClient.connect(MONGO_LAB_DB_URL, (dbError, database) => {
 
   middlewares.setAppUseConfigs(app);
   app.get('/workspaces', (req, res) => {
-		database.collection('workspaces').find({}).toArray((err, data) => {
-			if (err) {
+    database.collection('workspaces').find({}).toArray((err, data) => {
+      if (err) {
         // TODO handle error case and send response
         console.log(err);
       } else {
         res.json(data);
       }
-		});
+    });
   });
 
   app.listen(APP_PORT);
