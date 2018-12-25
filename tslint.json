@@ -4,7 +4,8 @@
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
-      "coverage/lcov-report/*.js"
+      "coverage/lcov-report/*.js",
+      "server/*.js"
     ]
   },
   "rules": {
@@ -12,6 +13,7 @@
     "jsx-boolean-value": ["never"],
     "semicolon": [true, "always", "ignore-bound-class-methods"],
     "max-file-line-count": [true, 1000],
+    "no-console": false,
     "ordered-imports": false,
     "variable-name": [
       true,
